@@ -1,0 +1,41 @@
+﻿@page
+@model WebApp.Pages.Inquilino.EditModel
+@{
+}
+<div id="AppEdit" class="container" data-entity="@JsonSerializer.Serialize(Model.Entity)">
+
+    <div class="card">
+        <div class="card-header">
+            @(Model.id.HasValue ? "Actualizar" : "Nuevo")
+        </div>
+        <div class="card-body">
+            <form id="FormEdit" method="post">
+                <input type="hidden" asp-for="Entity.Id_TipoInquilino" />
+                <div class="form-group mb-3">
+                    <label for="Entity.Id_TipoInquilino"" class="form-label">Inquilino</label>
+
+                    <select asp-for="Entity.Id_TipoInquilino" class="form-select"
+                            asp-items="@(new SelectList(Model.InquilinoLista,"Id_TipoInquilino","Descripcion"))" required>
+                    </select>
+                   
+                </div>
+                <div class="form-group form-check form-switch">
+
+                    <input type="checkbox" class="form-check-input" asp-for="Entity.Estado" value="true">
+                    <label for="Entity.Estado" class="form-check-label">Estado</label>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-online-primary">
+                            @(Model.id.HasValue ? "Actualizar":"Agregar")
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Script
+{
+    <script defer src="~/App/Inquilino/Edit.js"></script>
+}
